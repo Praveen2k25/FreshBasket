@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - FreshBasket</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to your CSS file -->
+    <style>
+        /* Add some styling directly for demo purposes */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+        
+        header {
+            background-color: #28a745;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        header .logo {
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        #about {
+            padding: 50px;
+            background: url('about-banner.jpg') no-repeat center center/cover;
+            color: #000000;
+            text-align: center;
+        }
+
+        #about h2 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        #about p {
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        .about-us-info {
+            display: flex;
+            justify-content: space-around;
+            padding: 50px;
+            background-color: white;
+        }
+
+        .about-us-info div {
+            width: 30%;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-us-info div h3 {
+            color: #28a745;
+            margin-bottom: 15px;
+        }
+
+        .about-us-info div p {
+            font-size: 1em;
+            color: #666;
+        }
+
+        footer {
+            background-color: #28a745;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">FreshBasket</div>
+        <nav>
+            <ul>
+                <li><a href="index">Home</a></li>
+                <li><a href="index">Products</a></li>
+                <li><a href="aboutus">About Us</a></li>
+                <li><a href="cart">Cart (<span id="cart-count">0</span>)</a></li>
+                <li><a href="contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- About Us Section -->
+    <section id="about">
+        <h2>About FreshBasket</h2>
+        <p>FreshBasket is your trusted destination for fresh, organic, and locally-sourced produce. Our mission is to provide farm-fresh groceries directly to your doorstep, ensuring the best quality and supporting local farmers.</p>
+    </section>
+
+    <!-- About Us Information -->
+    <section class="about-us-info">
+        <div>
+            <h3>Our Story</h3>
+            <p>Founded in 2024, FreshBasket was born out of the idea to connect local farmers with the urban community. We believe in delivering fresh produce while promoting sustainable farming practices.</p>
+        </div>
+        <div>
+            <h3>Our Vision</h3>
+            <p>Our vision is to revolutionize the way people buy groceries by offering an easy, convenient, and eco-friendly way to shop. We want to build a healthier future with clean, sustainable food for everyone.</p>
+        </div>
+        <div>
+            <h3>Our Values</h3>
+            <p>At FreshBasket, we value transparency, sustainability, and community. We are committed to minimizing waste, supporting local producers, and promoting healthy living with fresh, organic foods.</p>
+        </div>
+    </section>
+    
+    <!-- Founders Section -->
+    <section class="about-us-info">
+        <div>
+            <h3>Our Founders</h3>
+            <p><strong>Praveen R:</strong> Visionary and strategist behind FreshBasket's mission to support local farmers.</p>
+            <p><strong>Arockia Ludson J:</strong> Technology and operations expert ensuring a seamless customer experience.</p>
+            <p><strong>Bharath Babu :</strong> Advocate for sustainability and eco-friendly practices within FreshBasket's ecosystem.</p>
+            <p><strong>Sathish Kumar D:</strong> Marketing and outreach specialist dedicated to building FreshBasket's strong community connections.</p>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 FreshBasket. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Update cart count from localStorage
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.getElementById('cart-count').innerText = cart.length;
+        }
+
+        // Initialize cart count
+        updateCartCount();
+    </script>
+
+</body>
+</html>

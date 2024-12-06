@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - FreshBasket</title>
+    <link rel="stylesheet" href=""> <!-- Ensure style.css exists -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        header {
+            background-color: #28a745;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .logo {
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        #cart {
+            padding: 20px;
+        }
+
+        #order-success {
+            display: none;
+            background-color: #28a745;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 8px;
+            animation: fadeIn 0.5s, fadeOut 0.5s 2.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        footer {
+            background-color: #28a745;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 200px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .cart-item-image {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">FreshBasket</div>
+        <nav>
+            <ul>
+                <li><a href="index">Home</a></li>
+                <li><a href="index">Products</a></li>
+                <li><a href="aboutus">About Us</a></li>
+                <li><a href="contact">Contact</a></li>
+                <li><a href="cart">Cart (<span id="cart-count">0</span>)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <center>
+        <section id="cart">
+            <h2>Your Cart</h2>
+            <div id="cart-items"></div>
+            <div id="total"></div>
+            <button id="checkout-button">Proceed to Checkout</button>
+        </section>
+
+        <div id="order-success">Order Placed Successfully!</div>
+
+        <footer>
+            <p>&copy; 2024 FreshBasket. All rights reserved.</p>
+        </footer>
+    </center>
+
+    <script>
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartItemsContainer = document.getElementById('cart-items');
+        const totalDisplay = document.getElementById('total');
+        const checkoutButton = document.getElementById('checkout-button');
+        
+        function displayCartItems() {
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+        
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+                totalDisplay.innerHTML = '';
+                checkoutButton.style.display = 'none';
+                return;
+            }
+        
+            cart.forEach((item, index) => {
+                const itemElement = document.createElement('div');
+                itemElement.classList.add('cart-item');
+        
+                itemElement.innerHTML = `
+                    <img src="static/${item.image}" alt="${item.name}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <h3>${item.name}</h3>
+                        <p>Price: ₹${item.price.toFixed(2)}</p>
+                        <label for="quantity-${index}">Quantity:</label>
+                        <input type="number" id="quantity-${index}" value="${item.quantity || 1}" min="1" onchange="updateQuantity(${index}, this.value)">
+                        <button onclick="removeFromCart(${index})">Remove</button>
+                    </div>
+                `;
+        
+                cartItemsContainer.appendChild(itemElement);
+                total += (item.price * (item.quantity || 1)); // Calculate total considering quantity
+            });
+        
+            totalDisplay.innerHTML = `<h3>Total: ₹${total.toFixed(2)}</h3>`;
+            checkoutButton.style.display = 'block';
+        }
+        
+        function updateQuantity(index, quantity) {
+            quantity = parseInt(quantity); // Convert quantity to an integer
+            if (quantity > 0) {
+                cart[index].quantity = quantity; // Update quantity in cart
+                localStorage.setItem('cart', JSON.stringify(cart));
+                displayCartItems(); // Re-display cart items
+            }
+        }
+        
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCartItems();
+            updateCartCount();
+        }
+        
+        function updateCartCount() {
+            document.getElementById('cart-count').innerText = cart.length;
+        }
+        
+        checkoutButton.addEventListener('click', function() {
+            const orderData = { 
+                cart: cart.map(item => ({ 
+                    name: item.name, 
+                    price: item.price, 
+                    quantity: item.quantity 
+                })) 
+            }; 
+        
+            // Send order data to the server
+            fetch('/checkout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(orderData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    cartItemsContainer.innerHTML = '';
+                    totalDisplay.innerHTML = '';
+                    checkoutButton.style.display = 'none';
+        
+                    // Show success message
+                    const successMessage = document.getElementById('order-success');
+                    successMessage.style.display = 'block';
+        
+                    // Reset cart
+                    localStorage.removeItem('cart'); // Clear the cart
+        
+                    // Initialize the countdown for hiding the message
+                    setTimeout(function() {
+                        successMessage.style.display = 'none';
+                        displayCartItems(); // Optionally reload the cart items
+                    }, 3000);
+                } else {
+                    throw new Error('Order placement failed!');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while placing the order. Please try again.');
+            });
+        });
+    
+        function addToCart(item) {
+            const existingItemIndex = cart.findIndex(cartItem => cartItem.name === item.name);
+            
+            if (existingItemIndex > -1) {
+                // If the item already exists in the cart, update its quantity
+                cart[existingItemIndex].quantity += item.quantity;
+            } else {
+                // Otherwise, add it as a new item
+                cart.push({
+                    name: item.name,
+                    price: item.price,
+                    image: `images/${item.image}`, // Adjust this if necessary
+                    quantity: item.quantity
+                });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCartItems();
+            updateCartCount();
+        }
+        
+        // Initial display of cart items and update count
+        displayCartItems();
+        updateCartCount();
+    </script>
+    
+    
+</body>
+</html>

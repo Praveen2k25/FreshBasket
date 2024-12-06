@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshBasket</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">FreshBasket</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="about_us">About Us</a></li>
+                <li><a href="contact">Contact</a></li>
+                <li><a href="cart">Cart (<span id="cart-count">0</span>)</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="search-container">
+        <input type="text" placeholder="Search products..." class="search-input">
+        <button class="search-button">Search</button>
+    </div>
+
+    <section id="home" class="hero">
+        <h1>Welcome to FreshBasket</h1>
+        <p>Your online store for fresh produce!</p>
+        <br>
+        <h1>GRANT FRESH SALES</h1>
+        <h2>UPTO 80%OFF</h2>
+        <div class="timer" id="timer">00:00:00</div>
+    </section>
+   
+    <section id="products">
+        
+      
+
+        <h2>Our Products</h2>
+        <div class="product-container">
+            <div class="product">
+                <img src="static/apple.jpg" alt="Fresh Apples">
+                <h3>Fresh Apples</h3>
+                <p>₹240 per kg</p>
+                <button onclick="addToCart('Fresh Apples', 240, 'apple.jpg')">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="static/banana.jpg" alt="Bananas">
+                <h3>Bananas</h3>
+                <p>₹160 per dozen</p>
+                <button onclick="addToCart('Bananas', 160, 'banana.jpg')">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="static/carrot.jpg" alt="Carrots">
+                <h3>Carrots</h3>
+                <p>₹120 per kg</p>
+                <button onclick="addToCart('Carrots', 120, 'carrot.jpg')">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="static/broccoli.jpg" alt="Broccoli">
+                <h3>Broccoli</h3>
+                <p>₹200 per kg</p>
+                <button onclick="addToCart('Broccoli', 200, 'broccoli.jpg')">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="static/orange.jpg" alt="Orange">
+                <h3>Orange</h3>
+                <p>₹200 per kg</p>
+                <button onclick="addToCart('Orange', 200, 'orange.jpg')">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="static/strawberry.jpg" alt="Strawberries">
+                <h3>Strawberries</h3>
+                <p>₹240 per box</p>
+                <button onclick="addToCart('Strawberries', 240, 'strawberry.jpg')">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="static/raspberry.jpg" alt="Raspberry">
+                <h3>Raspberry</h3>
+                <p>₹290.67 per lb</p>
+                <button onclick="addToCart('Raspberry', 290.67,'raspberry.jpg')">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="static/blueberry.jpg" alt="Blueberry">
+                <h3>Blueberry</h3>
+                <p>₹331.17 per lb</p>
+                <button onclick="addToCart('Blueberry', 331.17,'blueberry.jpg')">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="static/plum.jpg" alt="Plum">
+                <h3>Plum</h3>
+                <p>₹206.67 per lb</p>
+                <button onclick="addToCart('Plum', 206.67,'plum.jpg')">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="static/bgrape.jpg" alt="Black Grapes">
+                <h3>Black Grapes</h3>
+                <p>₹248.17 per lb</p>
+                <button onclick="addToCart('Black Grapes', 248.17,'bgrape.jpg')">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="static/ggrape.jpg" alt="Green Grapes">
+                <h3>Green Grapes</h3>
+                <p>₹206.67 per lb</p>
+                <button onclick="addToCart('Green Grapes', 206.67,'ggrape.jpg')">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="static/onion.jpg" alt="Onion">
+                <h3>Onion</h3>
+                <p>₹107.17 per lb</p>
+                <button onclick="addToCart('Onion', 107.17,'onion.jpg')">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="static/tomato.jpg" alt="Tomato">
+                <h3>Tomato</h3>
+                <p>₹123.67 per lb</p>
+                <button onclick="addToCart('Tomato', 123.67,'tomato.jpg')">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="static/brinjal.jpg" alt="Brinjal">
+                <h3>Brinjal</h3>
+                <p>₹206.67 per lb</p>
+                <button onclick="addToCart('Brinjal', 206.67,'brinjal.jpg')">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="static/sonion.jpg" alt="Spring Onion">
+                <h3>Spring Onion</h3>
+                <p>₹165.17 per lb</p>
+                <button onclick="addToCart('Spring Onion', 165.17,'sonion.jpg')">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="static/corn.jpg" alt="Sweet Corn">
+                <h3>Sweet Corn</h3>
+                <p>₹123.67 per lb</p>
+                <button onclick="addToCart('Sweet Corn', 123.67,'corn.jpg')">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="static/cabage.jpg" alt="Cabbage">
+                <h3>Cabbage</h3>
+                <p>₹165.17 per lb</p>
+                <button onclick="addToCart('Cabbage', 165.17,'Cabage.jpg')">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="static/cflower.jpg" alt="Cauliflower">
+                <h3>Cauliflower</h3>
+                <p>₹206.67 per lb</p>
+                <button onclick="addToCart('Cauliflower', 206.67,'cflower.jpg')">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="static/potato.jpg" alt="Potato">
+                <h3>Potato</h3>
+                <p>₹82.17 per lb</p>
+                <button onclick="addToCart('Potato', 82.17,'potato.jpg')">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="static/drumstick.jpg" alt="Drumstick">
+                <h3>Drumstick</h3>
+                <p>₹248.17 per lb</p>
+                <button onclick="addToCart('Drumstick', 248.17,'drumstick.jpg')">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="static/ladiesf.jpg" alt="Ladies Finger">
+                <h3>Ladies Finger</h3>
+                <p>₹206.67 per lb</p>
+                <button onclick="addToCart('Ladies Finger', 206.67,'ladiesf.jpg')">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="static/cucu.jpg" alt="Cucumber">
+                <h3>Cucumber</h3>
+                <p>₹123.67 per lb</p>
+                <button onclick="addToCart('Cucumber', 123.67,'cucu.jpg')">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="static/lemon.jpg" alt="Lemon">
+                <h3>Lemon</h3>
+                <p>₹65.57 each</p>
+                <button onclick="addToCart('Lemon', 65.57,'lemon.jpg')">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="static/mint.jpg" alt="Mint">
+                <h3>Mint</h3>
+                <p>₹123.67 per bunch</p>
+                <button onclick="addToCart('Mint', 123.67,'mint.jpg')">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="static/cor.jpg" alt="Coriander Leaves">
+                <h3>Coriander Leaves</h3>
+                <p>₹123.67 per bunch</p>
+                <button onclick="addToCart('Coriander Leaves', 123.67,'cor.jpg')">Add to Cart</button>
+            </div>
+            
+
+            <!-- Additional product entries are similar and omitted for brevity -->
+        </div>
+    </section>
+
+
+<footer>
+    <p>&copy; 2024 FreshBasket. All rights reserved.</p>
+</footer>
+
+<script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function addToCart(productName, price, image) {
+        let itemIndex = cart.findIndex(item => item.name === productName);
+
+        if (itemIndex !== -1) {
+            cart[itemIndex].quantity += 1;
+        } else {
+            cart.push({
+                name: productName,
+                price: price,
+                image: image,
+                quantity: 1
+            });
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+    }
+
+    function updateCartCount() {
+        let cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+        document.getElementById('cart-count').innerText = cartCount;
+    }
+
+    updateCartCount();
+
+    // Timer script
+    let timerDuration = 30000; // 5 minutes
+    function formatTime(seconds) {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const secs = seconds % 60;
+        return ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')};
+    }
+
+    function startTimer(duration, display) {
+        let timeRemaining = duration;
+        const timerInterval = setInterval(() => {
+            display.textContent = formatTime(timeRemaining);
+            if (timeRemaining <= 0) {
+                clearInterval(timerInterval);
+                display.textContent = "Time's up!";
+            }
+            timeRemaining--;
+        }, 1000);
+    }
+
+    window.onload = () => {
+        const timerDisplay = document.getElementById('timer');
+        startTimer(timerDuration, timerDisplay);
+    };
+</script>
+
+</body>
+</html>   

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Summary - FreshBasket</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">FreshBasket</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#products">Products</a></li>
+                <li><a href="cart.html">Cart (<span id="cart-count">0</span>)</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Order Summary Section -->
+    <section id="order-summary">
+        <h2>Order Summary</h2>
+        <div id="order-items"></div> <!-- Dynamically populated with order items -->
+        <h3>Total Amount: $<span id="order-total">0</span></h3>
+    </section>
+
+    <!-- Order Tracking Section -->
+    <section id="order-tracking">
+        <h2>Track Your Order</h2>
+        <p>Your order has been placed. You can track the progress of your delivery here:</p>
+        <div class="tracking-status">
+            <p><strong>Status:</strong> <span id="order-status">Order Placed</span></p>
+            <button onclick="updateTracking()">Update Tracking</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 FreshBasket. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Fetch and display order items from localStorage
+        function loadOrderSummary() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let orderTotal = 0;
+            let orderItemsDiv = document.getElementById('order-items');
+            orderItemsDiv.innerHTML = ''; // Clear existing items
+
+            cart.forEach((item) => {
+                let itemDiv = document.createElement('div');
+                itemDiv.classList.add('order-item');
+                itemDiv.innerHTML = `
+                    <p><strong>${item.name}</strong></p>
+                    <p>Quantity: ${item.quantity}</p>
+                    <p>Price: $${item.price}</p>
+                `;
+                orderTotal += item.price * item.quantity;
+                orderItemsDiv.appendChild(itemDiv);
+            });
+
+            document.getElementById('order-total').innerText = orderTotal.toFixed(2);
+        }
+
+        // Simulate tracking status updates
+        function updateTracking() {
+            const statuses = ['Order Placed', 'Order Processed', 'Shipped', 'Out for Delivery', 'Delivered'];
+            let currentStatus = document.getElementById('order-status').innerText;
+            let nextStatusIndex = statuses.indexOf(currentStatus) + 1;
+
+            if (nextStatusIndex < statuses.length) {
+                document.getElementById('order-status').innerText = statuses[nextStatusIndex];
+            } else {
+                alert('Your order has been delivered!');
+            }
+        }
+
+        // Initialize order summary on page load
+        window.onload = function() {
+            loadOrderSummary();
+        };
+    </script>
+
+</body>
+</html>
